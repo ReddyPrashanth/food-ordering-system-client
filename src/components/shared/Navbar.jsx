@@ -2,18 +2,28 @@ import React, { Component } from 'react';
 
 class Navbar extends Component {
     state = { 
-        toggle: false
+        toggle: false,
+        menuItems: [
+            {
+                id: 1,
+                title: 'Sign In'
+            },
+            {
+                id: 2,
+                title: 'Sign Up'
+            }
+        ]
     }
 
     handleToggle = () => {
         let {toggle} = this.state;
-        toggle = !toggle;
         this.setState({
-            toggle
+            toggle: !toggle
         })
     }
 
     render() {
+        const {menuItems} = this.state;
         return ( 
             <header className="lg:px-16 px-6 bg-white flex flex-wrap items-center py-2">
                 <div className="flex-1 flex justify-between items-center">
@@ -27,8 +37,9 @@ class Navbar extends Component {
                 <div className={`lg:flex lg:items-center lg:w-auto w-full ${this.state.toggle ? '' : 'hidden'}`}>
                     <nav>
                         <ul className="lg:flex items-center justify-between text-base text-gray-600 pt-4 lg:pt-0">
-                            <li><a href="/" className="lg:px-3 px-2 py-2 block rounded border-b-2 border-transparent hover:text-gray-900 hover:bg-gray-200" >Sign In</a></li>
-                            <li><a href="/" className="lg:px-3 px-2 py-2 block rounded border-b-2 border-transparent hover:text-gray-900 hover:bg-gray-200" >Sign Up</a></li>
+                            { menuItems.map(item => (
+                                <li key={item.id}><a href="/" className="lg:px-3 px-2 py-2 block rounded border-b-2 border-transparent hover:text-gray-900 hover:bg-gray-200" >{item.title}</a></li>
+                            ))}
                         </ul>
                     </nav>
                 </div>
