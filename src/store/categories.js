@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { apiCallBegan } from './api';
 
 const slice = createSlice({
@@ -40,3 +40,11 @@ export const loadCategories = () =>
         onSuccess: categoriesReceived.type,
         onError: categoriesRequestFailed.type
     });
+
+// Selectors
+
+export const getMenuCategories = () => 
+    createSelector(
+        state => state.entities.categories,
+        categories => categories.list
+    );
