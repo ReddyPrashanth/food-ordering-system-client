@@ -38,7 +38,7 @@ class Navbar extends Component {
                     <nav>
                         <ul className="lg:flex items-center justify-between text-base pt-4 lg:pt-0">
                             { menuItems.map(item => (
-                                <li key={item.id}><a href="/" className="lg:px-3 px-2 py-2 block font-medium rounded border-b-2 border-transparent hover:text-gray-900 hover:bg-gray-200 uppercase" >{item.title}</a></li>
+                                <li key={item.id}><a href="/" className="lg:px-3 px-2 py-2 block font-medium rounded border-b-2 border-transparent hover:bg-gray-200 uppercase" >{item.title}</a></li>
                             ))}
                         </ul>
                     </nav>
