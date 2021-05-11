@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { getMenuCategories } from '../../store/categories';
 
-const MenuBar = ({categories}) => {
+const MenuBar = () => {
+    const categories = useSelector(getMenuCategories);
     return (
         <div className="px-6 border border-gray-200">
             <ul className="flex items-center">

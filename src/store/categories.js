@@ -5,7 +5,9 @@ const slice = createSlice({
     name: 'categories',
     initialState: {
         list: [],
-        loading: false
+        loading: false,
+        openModal: false,
+        product: null,
     },
     reducers: {
         categoriesRequested: (categories, action) => {
@@ -17,14 +19,22 @@ const slice = createSlice({
         },
         categoriesRequestFailed: (categories, action) => {
             categories.loading = false;
-        }
+        },
+        toggleModal: (categories, action) => {
+            categories.openModal = !categories.openModal;
+        },
+        setProductOnModal: (categories, action) => {
+            categories.product = action.payload
+        },
     }
 });
 
 export const {
     categoriesReceived,
     categoriesRequested,
-    categoriesRequestFailed
+    categoriesRequestFailed,
+    toggleModal,
+    setProductOnModal,
 } = slice.actions;
 export default slice.reducer;
 
@@ -39,12 +49,21 @@ export const loadCategories = () =>
         onStart: categoriesRequested.type,
         onSuccess: categoriesReceived.type,
         onError: categoriesRequestFailed.type
-    });
+    }); 
 
 // Selectors
 
-export const getMenuCategories = () => 
-    createSelector(
+export const getMenuCategories = createSelector(
         state => state.entities.categories,
         categories => categories.list
     );
+
+export const shouldOpen = createSelector(
+        state => state.entities.categories,
+        categories => categories.openModal
+    );
+
+export const getProduct = createSelector(
+    state => state.entities.categories,
+    categories => categories.product
+);
